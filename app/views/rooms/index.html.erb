@@ -1,0 +1,35 @@
+
+<nav class="navbar navbar-light bg-light">
+  <div class="container-fluid">
+    <span class="navbar-text" id="user-display" data-id=<%= current_user.id %>>
+      Logged in as <%= current_user.display_name %>
+    </span>
+  </div>
+</nav>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-3" id="available-users">
+      <% @users.each do |u| %>
+        <%= render 'rooms/user', user: u %>
+      <% end %>
+    </div>
+    <div class="col-9">
+      <% if @room.present? %>
+        <div id="room" data-room-id="<%= @room.id %>"></div>
+        <div id="chat-room" class="border border-3 rounded-3 mt-2 ">
+          <h6 class="text-end mt-1 mx-1 bg-light bg-gradient p-2"><%= @recipient.display_name %></h6>
+          <div id="messages" class="p-1">
+            <% @room.messages.each do |message| %>
+              <%= render 'messages/message', message: message %>
+            <% end %>
+          </div>
+        </div>
+        <div class="chat-box">
+          <%= render 'messages/form', message: Message.new, room: @room %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<%= button_to 'Sign out', destroy_user_session_path, method: :delete, class: "btn btn-primary logout" %>

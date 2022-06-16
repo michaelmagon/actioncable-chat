@@ -1,0 +1,52 @@
+#chat-room {
+  height: calc(100vh - 130px);
+  overflow-y: scroll;
+}
+.chat-box {
+  position: absolute;
+  width: calc(75% - 20px);
+
+  #new_message {
+    display: flex;
+  }
+}
+
+#messages {
+  .mine {
+    justify-content: end;
+    .badge {
+      background-color: #0d6efd!important;
+    }
+  }
+  
+  .theirs {
+    justify-content: start;
+    .badge {
+      background-color: white;
+      border: 1px solid #0d6efd!important;
+      color: #0d6efd!important;
+    }
+  }
+}
+
+.sessions.new, .registrations.new {
+  .card {
+    width: 45%;
+    margin: auto;
+  }
+}
+
+.rooms {
+  .logout {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+  }
+
+  #available-users {
+    a {
+      min-width: 210px;
+      font-size: 12px;
+    }
+  }
+}

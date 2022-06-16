@@ -1,0 +1,8 @@
+<%= form_for(message, remote: true, input_html: { class: 'form-inline flex' }) do |form| %>
+  <%= form.hidden_field :room_id, value: room.id %>
+  <div class="input-group">
+    <%= form.text_field :content, class: 'form-control', placeholder: "Type Here..." %>
+  </div>
+
+  <%= form.submit "Send", class: 'btn btn-primary', id: "send-message", data: { disable_with: false } %>
+<% end %>

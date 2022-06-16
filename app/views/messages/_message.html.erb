@@ -1,0 +1,3 @@
+<div class="d-flex <%= message.user_id == current_user.id ? "mine" : "theirs" %>">
+  <span class="badge rounded-pill fs-6 mb-1"><%= message.content %></span><br/>
+</div>
