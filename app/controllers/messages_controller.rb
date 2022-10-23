@@ -26,9 +26,9 @@ class MessagesController < ApplicationController
     @message.user = current_user
     
     @message.save
-
+    partial = @message.message_type == "text" ? "messages/message" : "messages/gif"
     response = render_to_string(
-      partial: 'messages/message', 
+      partial: partial, 
       locals: {message: @message }
     )
     ActionCable.server.broadcast "room_channel_#{@message.room_id}", response: response, type: "message", source: @message.user_id
@@ -65,6 +65,6 @@ class MessagesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def message_params
-      params.require(:message).permit(:content, :user, :room_id)
+      params.permit(:content, :user_id, :room_id, :message_type)
     end
 end

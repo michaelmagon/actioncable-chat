@@ -1,4 +1,6 @@
 import consumer from "./consumer"
+import { beep } from "../utilities/utilities.js";
+
 document.addEventListener("turbolinks:load", function() {
   const room = document.getElementById('room');
   if (room) {
@@ -19,12 +21,13 @@ document.addEventListener("turbolinks:load", function() {
         if (data.type == 'message') {
           const messageContainer = document.getElementById("messages");
           var template = document.createElement('template');
-          template.innerHTML = data.response.trim();;
+          template.innerHTML = data.response.trim();
           template.content.firstChild.classList.remove('mine','theirs');
           if ( userId == data.source ) {
             template.content.firstChild.classList.add('mine');
           } else {
             template.content.firstChild.classList.add('theirs');
+            beep();
           }
           messageContainer.appendChild(template.content.firstChild);
 
@@ -39,3 +42,20 @@ document.addEventListener("turbolinks:load", function() {
     });
   }
 });
+
+
+// const roomId = document.getElementById("room").getAttribute('data-room-id');
+// const userId = document.getElementById("user-display").getAttribute('data-id');
+// const message = {
+//   type: 'message',
+//   source: userId,
+//   room_id: roomId,
+//   message: gif.url
+// }
+// fetch('/messages', {
+//   method: 'POST',
+//   headers: {
+//     'Content-Type': 'application/json'
+//   },
+//   body: JSON.stringify(message)
+// })
