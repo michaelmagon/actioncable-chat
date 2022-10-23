@@ -2,12 +2,13 @@
 #
 # Table name: messages
 #
-#  id         :bigint           not null, primary key
-#  content    :text
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  room_id    :bigint           not null
-#  user_id    :bigint
+#  id           :bigint           not null, primary key
+#  content      :text
+#  message_type :string           default("text")
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  room_id      :bigint           not null
+#  user_id      :bigint
 #
 # Indexes
 #
@@ -21,4 +22,6 @@
 class Message < ApplicationRecord
   belongs_to :room
   belongs_to :user
+
+  enum message_type: { text: 'text', image: 'image', gif: 'gif' }
 end
