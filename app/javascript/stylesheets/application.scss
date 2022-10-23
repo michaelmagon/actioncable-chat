@@ -1,3 +1,6 @@
+@import "custom";
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
 #chat-room {
   height: calc(100vh - 130px);
   overflow-y: scroll;
@@ -48,5 +51,17 @@
       min-width: 210px;
       font-size: 12px;
     }
+  }
+}
+
+#gif-container {
+  top: 15%;
+  background-color: darkgray;
+  height: 85%;
+  overflow: scroll;
+  transition: all 0.5s ease-in-out;
+
+  &.hidden {
+    height: 0;
   }
 }
