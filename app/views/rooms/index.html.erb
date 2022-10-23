@@ -1,4 +1,6 @@
-
+<%= content_tag :div, nil, data: {controller: "rooms"} do %>
+  <div class="btn btn-primary">Say Hello</div>
+<% end %>
 <nav class="navbar navbar-light bg-light">
   <div class="container-fluid">
     <span class="navbar-text" id="user-display" data-id=<%= current_user.id %>>
@@ -14,22 +16,24 @@
         <%= render 'rooms/user', user: u %>
       <% end %>
     </div>
-    <div class="col-9">
+    <div class="col-9 position-relative">
       <% if @room.present? %>
         <div id="room" data-room-id="<%= @room.id %>"></div>
         <div id="chat-room" class="border border-3 rounded-3 mt-2 ">
           <h6 class="text-end mt-1 mx-1 bg-light bg-gradient p-2"><%= @recipient.display_name %></h6>
           <div id="messages" class="p-1">
             <% @room.messages.each do |message| %>
-              <%= render 'messages/message', message: message %>
+              <%= render message.gif? ? 'messages/gif' : 'messages/message', message: message %>
             <% end %>
           </div>
         </div>
         <div class="chat-box">
           <%= render 'messages/form', message: Message.new, room: @room %>
         </div>
+        <div id="gif-container" class="position-absolute p-1" data-target="rooms.gifContainer"></div>
       <% end %>
     </div>
   </div>
+
 </div>
 <%= button_to 'Sign out', destroy_user_session_path, method: :delete, class: "btn btn-primary logout" %>
